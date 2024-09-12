@@ -13,19 +13,9 @@ import {
 import * as path from 'path';
 import { dataSourceOptions } from './configs/orm.config';
 import { AuthModule } from './modules/auth/auth.module';
-import { BrandModule } from './modules/brand/brand.module';
-import { CategoryModule } from './modules/category/category.module';
-import { CloudinaryModule } from './modules/cloudinary/cloudinary.module';
-import { MailModule } from './modules/mail/mail.module';
-import { ModelModule } from './modules/model/model.module';
-import { OrderModule } from './modules/order/order.module';
-import { OtpModule } from './modules/otp/otp.module';
-import { ProductModule } from './modules/product/product.module';
-import { ProvinceModule } from './modules/province/province.module';
-import { ReviewModule } from './modules/review/review.module';
-import { ShipmentModule } from './modules/shipment/shipment.module';
+import { LoanModule } from './modules/loan/loan.module';
+import { UserLoanModule } from './modules/user-loan/user-loan.module';
 import { UserModule } from './modules/user/user.module';
-import { VoucherModule } from './modules/voucher/voucher.module';
 
 @Module({
   imports: [
@@ -34,7 +24,7 @@ import { VoucherModule } from './modules/voucher/voucher.module';
     JwtModule.register({
       global: true,
       secret: process.env.SECRET_JWT,
-      signOptions: { expiresIn: '604800s' },
+      // signOptions: { expiresIn: '604800s' },
     }),
     I18nModule.forRoot({
       fallbackLanguage: 'en',
@@ -51,18 +41,8 @@ import { VoucherModule } from './modules/voucher/voucher.module';
     ScheduleModule.forRoot(),
     AuthModule,
     UserModule,
-    MailModule,
-    OtpModule,
-    CloudinaryModule,
-    ProductModule,
-    ReviewModule,
-    BrandModule,
-    CategoryModule,
-    ModelModule,
-    OrderModule,
-    ProvinceModule,
-    ShipmentModule,
-    VoucherModule,
+    UserLoanModule,
+    LoanModule,
   ],
   controllers: [],
   providers: [

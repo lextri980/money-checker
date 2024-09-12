@@ -12,22 +12,4 @@ export class UserDto {
 
   @Exclude()
   password: string;
-
-  @Expose()
-  phoneNumber: string;
-
-  @Expose()
-  address: string;
-
-  @Expose()
-  avatar: string;
-
-  @Expose()
-  role: string;
-
-  @Expose()
-  createdAt: Date;
-
-  @Expose()
-  updatedAt: Date;
 }
