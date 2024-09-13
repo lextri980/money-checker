@@ -8,5 +8,6 @@ import { UserLoanService } from './user-loan.service';
   imports: [TypeOrmModule.forFeature([UserLoan])],
   controllers: [UserLoanController],
   providers: [UserLoanService],
+  exports: [UserLoanService],
 })
 export class UserLoanModule {}

@@ -1,3 +1,4 @@
+import { sumBy } from 'lodash';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { In, Repository } from 'typeorm';
@@ -11,17 +12,35 @@ export class UserLoanService {
     private readonly userLoanRepo: Repository<UserLoan>,
   ) {}
 
-  async findUserLoan(userLoanId: string) {
-    const userLoan = await this.userLoanRepo.findOne({
-      where: { userLoanId },
-    });
+  async findUserLoanById(userLoanId: string) {
+    const userLoan = await this.userLoanRepo
+      .createQueryBuilder('userLoan')
+      .leftJoinAndSelect('userLoan.loans', 'loan')
+      .where('userLoan.userLoanId = :userLoanId', { userLoanId })
+      .getOne();
+    if (!userLoan) {
+      throw new BadRequestException('User loan not found');
+    }
     return userLoan;
   }
 
   async findUserLoanByName(name: string) {
-    const userLoan = await this.userLoanRepo.find({
-      where: { name },
-    });
+    const userLoan = await this.userLoanRepo
+      .createQueryBuilder('userLoan')
+      .where('userLoan.name = :name', { name })
+      .getOne();
+    if (!userLoan) {
+      throw new BadRequestException('User loan not found');
+    }
+    return userLoan;
+  }
+
+  async findUserLoanList(userId: string) {
+    const userLoan = await this.userLoanRepo
+      .createQueryBuilder('userLoan')
+      .where('userLoan.user.userId = :userId', { userId })
+      .orderBy('userLoan.name', 'ASC')
+      .getMany();
     return userLoan;
   }
 
@@ -36,7 +55,6 @@ export class UserLoanService {
         `The following loan names already exist: ${existingNames}`,
       );
     }
-    console.log(body);
     const mappedBody = body.map((item) => {
       return {
         name: item.name,
@@ -44,9 +62,26 @@ export class UserLoanService {
         user: { userId },
       };
     });
-    console.log(mappedBody);
-    const initUserLoans = this.userLoanRepo.create();
+    const initUserLoans = this.userLoanRepo.create(mappedBody);
     const newUserLoans = await this.userLoanRepo.save(initUserLoans);
     return newUserLoans;
+  }
+
+  async updateTotalMoney(userLoanId: string, money: number) {
+    const userLoan = await this.findUserLoanById(userLoanId);
+    if (!userLoan) {
+      throw new BadRequestException('User loan not found!');
+    }
+    const totalMoney = sumBy(userLoan.loans, 'amount') + money;
+
+    const updatedUserLoan = await this.userLoanRepo
+      .createQueryBuilder('userLoanId')
+      .update(UserLoan)
+      .set({
+        totalMoney,
+      })
+      .where('userLoanId = :userLoanId', { userLoanId })
+      .execute();
+    return updatedUserLoan;
   }
 }

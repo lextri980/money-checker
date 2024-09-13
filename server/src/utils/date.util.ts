@@ -17,11 +17,11 @@ export class DateUtil {
   }
 
   /**
-   *
+   * Calculate the different of 2 dates
    * @param dateStart Date
    * @param dateEnd Date
    * @param timeUnit string
-   * @returns { dateDiff: number, timeUnit: string }
+   * @returns Object { dateDiff: number, timeUnit: string }
    */
   static dateDiff(
     dateStart: Date,
@@ -35,5 +35,16 @@ export class DateUtil {
       dateDiff,
       timeUnit,
     };
+  }
+
+  /**
+   * Change date string from DD/MM/YYYY to Date type
+   * @param date string
+   * @returns Date
+   */
+  static dateStringToDate(date: string) {
+    const [day, month, year] = date.split('/');
+    const dateForm = new Date(+year, +month - 1, +day);
+    return dateForm;
   }
 }

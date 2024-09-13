@@ -1,3 +1,4 @@
+import { User } from './../user/user.entity';
 import { UserLoan } from './../user-loan/user-loan.entity';
 import { BaseEntity } from 'src/databases/base.entity';
 import {
@@ -16,6 +17,9 @@ export class Loan extends BaseEntity {
   @Column()
   amount: number;
 
+  @Column()
+  content: string;
+
   @Column({ default: true })
   isDebt: boolean;
 
@@ -25,4 +29,8 @@ export class Loan extends BaseEntity {
   @ManyToOne(() => UserLoan, (userLoan) => userLoan.loans)
   @JoinColumn({ name: 'userLoanId' })
   userLoan: UserLoan;
+
+  @ManyToOne(() => User, (user) => user.loans)
+  @JoinColumn({ name: 'createdBy' })
+  createdBy: User;
 }
