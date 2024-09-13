@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 :root {
+  font-family: 'Nunito', sans-serif !important;
   --max-width: 1100px;
   min-height: 100vh;
   --border-radius: 12px;
@@ -86,18 +87,14 @@
 
 html,
 body {
+  font-family: 'Nunito', sans-serif !important;
   max-width: 100vw;
   overflow-x: hidden;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: #000;
+  background: #fff
 }
 
 a {
