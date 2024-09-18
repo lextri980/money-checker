@@ -1,11 +1,16 @@
 "use client";
-import { AuthLayout } from "@/layouts";
-import React from "react";
+import { AuthLayout } from '@/layouts';
+import React, { Suspense } from "react";
+import Loading from './loading';
 
 export default function AuthenticationLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <AuthLayout>{children}</AuthLayout>;
+  return (
+    <Suspense fallback={<Loading />}>
+      <AuthLayout>{children}</AuthLayout>
+    </Suspense>
+  );
 }

@@ -1,3 +1,4 @@
-import StorageUtil from "./storageUtil";
+import StyledComponentsRegistry from "./registry.util";
+import StorageUtil from "./storage.util";
 
-export { StorageUtil };
+export { StorageUtil, StyledComponentsRegistry };

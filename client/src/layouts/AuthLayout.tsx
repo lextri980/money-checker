@@ -1,10 +1,11 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
-import image from '@/assets/image/bg-auth.jpg'
+import Image from 'next/image'
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
-    <AuthLayoutContainer>
+    <AuthLayoutContainer className="auth-layout-container">
+      <Image className="bg-img" src="/images/bg-auth.jpg" alt="background" fill />
       <div className="dialog-block">{children}</div>
     </AuthLayoutContainer>
   );
@@ -15,15 +16,17 @@ const AuthLayoutContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url(${image.src}) no-repeat center center fixed;
-  background-size: cover;
+  position: relative;
   .dialog-block {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 400px;
-    height: 400px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    padding: 10px;
     display: flex;
     justify-content: center;
   }
