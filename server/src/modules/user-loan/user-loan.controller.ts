@@ -28,7 +28,7 @@ export class UserLoanController {
     const userLoan = await this.userLoanService.findUserLoanList(
       currentUser.userId,
     );
-    if (!userLoan || userLoan.length === 0) {
+    if (!userLoan) {
       throw new BadRequestException('User loan not found!');
     }
     return ResponseUtil.success(res, userLoan, 'Find user loan successfully');

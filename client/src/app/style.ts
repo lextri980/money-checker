@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
-export const AppContainer = styled.main`
+export const HomeContainer = styled.div`
   min-height: 100vh;
-  width: 100%;
+  display: grid;
+  place-items: center;
 `;

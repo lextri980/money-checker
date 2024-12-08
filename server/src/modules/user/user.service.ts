@@ -8,4 +8,9 @@ export class UserService {
   constructor(
     @InjectRepository(User) private readonly userRepo: Repository<User>,
   ) {}
+
+  async findUserById(userId: string) {
+    const user = this.userRepo.findOne({ where: { userId } });
+    return user;
+  }
 }

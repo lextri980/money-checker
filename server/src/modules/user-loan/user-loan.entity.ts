@@ -22,8 +22,8 @@ export class UserLoan extends BaseEntity {
   totalMoney: number;
 
   @ManyToOne(() => User, (user) => user.userLoans)
-  @JoinColumn({ name: 'userId' })
-  user: User;
+  @JoinColumn({ name: 'userCreated' })
+  userCreated: User;
 
   @OneToMany(() => Loan, (loan) => loan.userLoan, {
     cascade: ['remove'],

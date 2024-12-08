@@ -43,4 +43,10 @@ export class AuthService {
       throw new Error(error);
     }
   }
+
+  async activateAccount(id: string) {
+    await this.userRepo.update(id, {
+      isActivate: true,
+    });
+  }
 }

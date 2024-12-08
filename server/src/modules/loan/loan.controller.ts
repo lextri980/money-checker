@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Post, Res, UseGuards } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Get,
+  Post,
+  Query,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import { Response } from 'express';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { ResponseUtil } from 'src/utils';
@@ -12,9 +21,11 @@ export class LoanController {
   constructor(private readonly loanService: LoanService) {}
 
   @Get('/list')
-  @UseGuards(AuthGuard)
-  async getLoanList(@Res() res: Response, @CurrentUser() currentUser: User) {
-    const loanList = await this.loanService.getLoanList(currentUser.userId);
+  async getLoanList(@Res() res: Response, @Query('userId') userId: string) {
+    if (!userId) {
+      throw new BadRequestException('No user specified!');
+    }
+    const loanList = await this.loanService.getLoanList(userId);
     return ResponseUtil.success(res, loanList, 'Get loan list successfully');
   }
 

@@ -4,12 +4,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { In, Repository } from 'typeorm';
 import { CreateUserLoanDto } from './dto/create-user-loan.dto';
 import { UserLoan } from './user-loan.entity';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class UserLoanService {
   constructor(
     @InjectRepository(UserLoan)
     private readonly userLoanRepo: Repository<UserLoan>,
+    private userService: UserService,
   ) {}
 
   async findUserLoanById(userLoanId: string) {
@@ -18,9 +20,6 @@ export class UserLoanService {
       .leftJoinAndSelect('userLoan.loans', 'loan')
       .where('userLoan.userLoanId = :userLoanId', { userLoanId })
       .getOne();
-    if (!userLoan) {
-      throw new BadRequestException('User loan not found');
-    }
     return userLoan;
   }
 
@@ -49,6 +48,12 @@ export class UserLoanService {
     const existingLoans = await this.userLoanRepo.find({
       where: { name: In(names) },
     });
+    const userCreated = await this.userService.findUserById(userId);
+    if (!userCreated) {
+      throw new BadRequestException(
+        'The user creating this user loan does not exist!',
+      );
+    }
     if (existingLoans.length > 0) {
       const existingNames = existingLoans.map((loan) => loan.name).join(', ');
       throw new BadRequestException(

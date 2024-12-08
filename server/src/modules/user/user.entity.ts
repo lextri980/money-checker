@@ -17,7 +17,13 @@ export class User extends BaseEntity {
   @Column()
   password: string;
 
-  @OneToMany(() => UserLoan, (userLoan) => userLoan.user, {
+  @Column('boolean', { default: false })
+  isActivate: boolean;
+
+  @Column({ default: 1 })
+  role: number;
+
+  @OneToMany(() => UserLoan, (userLoan) => userLoan.userCreated, {
     cascade: ['remove'],
   })
   userLoans: UserLoan[];
