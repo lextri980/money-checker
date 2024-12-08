@@ -1,11 +1,22 @@
-import { Body, Controller, Post, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Param,
+  Post,
+  Put,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { I18n, I18nContext } from 'nestjs-i18n';
-import { Swagger } from 'src/decorators';
+import { Roles, Swagger } from 'src/decorators';
 import { ResponseUtil, TransformDataUtil } from 'src/utils';
 import { UserDto } from '../user/dto/user.dto';
+import { roleConstant } from './../../constants/common.constant';
+import { AuthGuard } from './../../guards/auth.guard';
+import { RoleGuard } from './../../guards/role.guard';
 import { AuthService } from './auth.service';
 import { authSwagger } from './auth.swagger';
 import { LoginDto } from './dto/login.dto';
@@ -42,6 +53,8 @@ export class AuthController {
         userId: user.userId,
         email: user.email,
         name: user.name,
+        role: user.role,
+        isActivate: user.isActivate,
       });
       const data = {
         ...TransformDataUtil.serialize(UserDto, user),
@@ -51,5 +64,13 @@ export class AuthController {
     } catch (error) {
       return ResponseUtil.serverError(res, error.stack);
     }
+  }
+
+  @Put('activate-account/:userId')
+  @UseGuards(AuthGuard, RoleGuard)
+  @Roles([roleConstant.ROOT_ADMIN])
+  async activateAccount(@Res() res: Response, @Param('userId') id: string) {
+    await this.authService.activateAccount(id);
+    return ResponseUtil.success(res, null, 'Activate account successfully!');
   }
 }

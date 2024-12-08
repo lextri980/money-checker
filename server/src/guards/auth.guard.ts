@@ -14,6 +14,8 @@ declare module 'Express' {
       userId: string;
       email: string;
       name: string;
+      role: number;
+      isActivate: boolean;
     };
   }
 }

@@ -12,4 +12,10 @@ export class UserDto {
 
   @Exclude()
   password: string;
+
+  @Expose()
+  role: number;
+
+  @Expose()
+  isActivate: boolean;
 }

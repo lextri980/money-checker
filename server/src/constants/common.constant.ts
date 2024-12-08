@@ -9,7 +9,7 @@ export const otpStatus = {
 };
 
 export const roleConstant = {
-  ADMIN: 0,
-  VENDOR: 1,
-  CUSTOMER: 2,
+  ROOT_ADMIN: 0,
+  ADMIN: 1,
+  NOT_ACTIVATE_ADMIN: 2,
 };
