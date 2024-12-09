@@ -3,6 +3,7 @@ export interface IFormInput {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control: any;
   name: string;
+  className: string;
   // Common
   defaultValue?: string;
   variant?: "flat" | "bordered" | "faded" | "underlined";
