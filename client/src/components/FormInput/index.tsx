@@ -26,7 +26,7 @@ export default function FormInput(props: IFormInput) {
     const Input = InputComponent[type];
     const { ...rest } = params;
 
-    return <Input.Component {...rest} {...inputProps} />;
+    return <Input.Component {...rest} {...inputProps} radius="sm" />;
   };
 
   return (

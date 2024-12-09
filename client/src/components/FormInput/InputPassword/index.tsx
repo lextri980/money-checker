@@ -1,4 +1,4 @@
-import { Icon } from "@/components";
+import Icon from "@/components/Icon";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { InputProps } from "@nextui-org/react";
 import React, { useState } from "react";

@@ -1,9 +1,10 @@
-import { Input, InputProps } from "@nextui-org/input";
+import { InputProps } from "@nextui-org/input";
 import React from "react";
+import { InputWrapper } from "./style";
 
 const InputText = React.forwardRef<HTMLInputElement, InputProps>(
   (props, ref) => {
-    return <Input {...props} baseRef={ref} />;
+    return <InputWrapper variant="bordered" {...props} baseRef={ref} />;
   }
 );
 
