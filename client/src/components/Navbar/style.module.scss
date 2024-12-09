@@ -1,0 +1,13 @@
+.navbar-container {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  padding: 0 50px;
+  justify-content: space-between;
+  box-shadow: 0 4px 4px #d3d3d3;
+  margin-bottom: 20px;
+  .navbar-menu {
+    display: flex;
+    align-items: center;
+  }
+}

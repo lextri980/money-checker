@@ -10,5 +10,6 @@ export interface IButton {
     | "warning"
     | "danger"
     | undefined;
+  radius?: string;
   onClick: MouseEventHandler;
 }
