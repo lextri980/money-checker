@@ -1,4 +1,37 @@
+.error-bg {
+  background-color: #FF4545;
+}
+.success-bg {
+  background-color: #118B50;
+}
+.warning-bg {
+  background-color: #FA812F;
+}
+.info-bg {
+  background-color: #81BFDA;
+}
 .black-bg {
   background-color: black;
+  color: white;
+}
+.white-bg {
+  background-color: white;
+}
+.text-error {
+  color: #FF4545;
+}
+.text-success {
+  color: #118B50;
+}
+.text-warning {
+  color: #FA812F;
+}
+.text-info {
+  color: #81BFDA;
+}
+.text-black {
+  color: black;
+}
+.text-white {
   color: white;
 }

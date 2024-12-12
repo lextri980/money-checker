@@ -16,6 +16,12 @@ export class LoanService {
   ) {}
 
   async getLoanList(userId: string) {
+    const userCreated = await this.userService.findUserById(userId);
+    if (!userCreated) {
+      throw new BadRequestException(
+        'The user creating this user loan does not exist!',
+      );
+    }
     const loans = await this.loanRepo
       .createQueryBuilder('loan')
       .leftJoinAndSelect('loan.createdBy', 'user')

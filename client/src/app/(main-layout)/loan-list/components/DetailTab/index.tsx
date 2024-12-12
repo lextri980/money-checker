@@ -1,6 +1,7 @@
-import React from "react";
-import "./style.scss";
+import { DefaultResponseType } from "@/types/common.type";
+import { DateUtil } from "@/utils";
 import {
+  Chip,
   Table,
   TableBody,
   TableCell,
@@ -8,54 +9,40 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/react";
+import "./style.scss";
 
-export default function DetailTab() {
-  const itemTable = [
-    {
-      id: "1sadfdfdsf",
-      name: "A",
-      count: 0,
-      outstandingDebt: 0,
-      paid: 0,
-      total: 100,
-    },
-    {
-      id: "asudhasuihd",
-      name: "B",
-      count: 0,
-      outstandingDebt: 0,
-      paid: 0,
-      total: 150,
-    },
-    {
-      id: "asudhasuihd",
-      name: "C",
-      count: 0,
-      outstandingDebt: 0,
-      paid: 0,
-      total: 120,
-    },
-  ];
-
+export default function DetailTab({
+  loanListResponse,
+}: {
+  loanListResponse: DefaultResponseType;
+}) {
   return (
     <div className="loan-list-page__detail-tab-container">
       <Table aria-label="Total table" isStriped className="">
         <TableHeader>
+          <TableColumn width={75}>NO.</TableColumn>
           <TableColumn width={75}>DAY</TableColumn>
           <TableColumn width={120}>COST</TableColumn>
           <TableColumn width={200}>DEBTOR</TableColumn>
           <TableColumn>ITEM</TableColumn>
-          <TableColumn width={120}>CHECK</TableColumn>
+          <TableColumn width={120}>DONE</TableColumn>
           <TableColumn width={75}>5500</TableColumn>
         </TableHeader>
-        <TableBody emptyContent={"No datas to display."}>
-          {itemTable?.map((item, index) => (
+        <TableBody emptyContent={"No loan to display."}>
+          {loanListResponse.data?.map((item: any, index: number) => (
             <TableRow key={index}>
               <TableCell>{index + 1}</TableCell>
-              <TableCell>{item.name}</TableCell>
-              <TableCell>{item.count}</TableCell>
-              <TableCell>{item.outstandingDebt}</TableCell>
-              <TableCell>{item.paid}</TableCell>
+              <TableCell>
+                {DateUtil.formatDate(item.triggerDate, "DD-MM")}
+              </TableCell>
+              <TableCell>{item.amount}</TableCell>
+              <TableCell>{item.userLoan.name}</TableCell>
+              <TableCell>{item.content}</TableCell>
+              <TableCell>
+                <Chip className={item.isDebt ? "error-bg text-white" : "warning-bg text-white"}>
+                  {item.isDebt ? "Borrowed" : "Lent"}
+                </Chip>
+              </TableCell>
               <TableCell>{""}</TableCell>
             </TableRow>
           ))}
