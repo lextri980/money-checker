@@ -36,6 +36,7 @@ export default function TabWrapper({
           name="search"
           placeholder="Search your name"
           className="w-6/12"
+          variant="bordered"
         />
         <Button className="black-bg">Search</Button>
       </div>

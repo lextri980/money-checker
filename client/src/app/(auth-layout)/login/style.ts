@@ -8,7 +8,8 @@ export const LoginContainer = styled.div`
   border-radius: 6px;
   box-shadow: 0 0 8px 4px #ececec;
   .form-group {
-    .remember-me {
+    .remember-me,
+    .register-link {
       width: 100%;
       display: flex;
       justify-content: flex-end;

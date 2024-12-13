@@ -16,6 +16,10 @@ export default function DetailTab({
 }: {
   loanListResponse: DefaultResponseType;
 }) {
+  const totalCost = loanListResponse.data?.reduce(
+    (acc: number, item: any) => acc + item.amount,
+    0
+  );
   return (
     <div className="loan-list-page__detail-tab-container">
       <Table aria-label="Total table" isStriped className="">
@@ -26,7 +30,9 @@ export default function DetailTab({
           <TableColumn width={200}>DEBTOR</TableColumn>
           <TableColumn>ITEM</TableColumn>
           <TableColumn width={120}>DONE</TableColumn>
-          <TableColumn width={75}>5500</TableColumn>
+          <TableColumn key="total-cost" width={75}>
+            {totalCost}
+          </TableColumn>
         </TableHeader>
         <TableBody emptyContent={"No loan to display."}>
           {loanListResponse.data?.map((item: any, index: number) => (
@@ -39,7 +45,13 @@ export default function DetailTab({
               <TableCell>{item.userLoan.name}</TableCell>
               <TableCell>{item.content}</TableCell>
               <TableCell>
-                <Chip className={item.isDebt ? "error-bg text-white" : "warning-bg text-white"}>
+                <Chip
+                  className={`${
+                    item.isDebt
+                      ? "error-bg text-white"
+                      : "warning-bg text-white"
+                  } chip-width`}
+                >
                   {item.isDebt ? "Borrowed" : "Lent"}
                 </Chip>
               </TableCell>

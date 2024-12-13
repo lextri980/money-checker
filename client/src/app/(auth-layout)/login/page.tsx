@@ -1,12 +1,17 @@
 "use client";
-import { Button, FormInput } from "@/components";
+import Button from "@/components/Button";
+import FormInput from "@/components/FormInput";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { DefaultValues, SubmitHandler, useForm } from "react-hook-form";
 import { schema } from "./schema";
 import { LoginContainer } from "./style";
 import { ILogin } from "./type";
+import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { AuthActions } from "@/store/authStore/auth.reducer";
 
 export default function Login() {
+  const dispatch = useDispatch();
   const defaultValues: DefaultValues<ILogin> = {
     email: "",
     password: "",
@@ -24,7 +29,7 @@ export default function Login() {
   });
 
   const login: SubmitHandler<ILogin> = (value) => {
-    console.log(value);
+    dispatch(AuthActions.loginRequest(value));
     reset();
   };
 
@@ -59,6 +64,12 @@ export default function Login() {
         <div className="remember-me">
           <FormInput control={control} type="checkbox" name="remember" />
           <span>Remember me</span>
+        </div>
+        <div className="register-link">
+          <Link className="hyperlink" href="/register">
+            Register
+          </Link>
+          &nbsp;to become an admin
         </div>
         <Button onClick={handleSubmit(login)}>Login</Button>
       </div>

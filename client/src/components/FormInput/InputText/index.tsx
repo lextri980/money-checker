@@ -4,7 +4,7 @@ import { InputWrapper } from "./style";
 
 const InputText = React.forwardRef<HTMLInputElement, InputProps>(
   (props, ref) => {
-    return <InputWrapper variant="bordered" {...props} baseRef={ref} />;
+    return <InputWrapper {...props} baseRef={ref} />;
   }
 );
 
