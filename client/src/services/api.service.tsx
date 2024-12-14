@@ -81,7 +81,7 @@ class ApiService {
   async post<T>(
     endpoint: string,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    data: any
+    data?: any
   ): Promise<AxiosResponse<ApiResponse<T>>> {
     try {
       const response: AxiosResponse<ApiResponse<T>> =
@@ -103,7 +103,7 @@ class ApiService {
   async put<T>(
     endpoint: string,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    data: any
+    data?: any
   ): Promise<AxiosResponse<ApiResponse<T>>> {
     try {
       const response: AxiosResponse<ApiResponse<T>> =

@@ -35,9 +35,15 @@ export class UserLoanService {
   }
 
   async findUserLoanList(userId: string) {
+    const userCreated = await this.userService.findUserById(userId);
+    if (!userCreated) {
+      throw new BadRequestException(
+        'The user creating this user loan does not exist!',
+      );
+    }
     const userLoan = await this.userLoanRepo
       .createQueryBuilder('userLoan')
-      .where('userLoan.user.userId = :userId', { userId })
+      .where('userLoan.userCreated.userId = :userId', { userId })
       .orderBy('userLoan.name', 'ASC')
       .getMany();
     return userLoan;
@@ -64,7 +70,7 @@ export class UserLoanService {
       return {
         name: item.name,
         totalMoney: 0,
-        user: { userId },
+        userCreated: { userId },
       };
     });
     const initUserLoans = this.userLoanRepo.create(mappedBody);

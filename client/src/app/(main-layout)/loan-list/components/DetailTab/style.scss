@@ -7,4 +7,13 @@
   td {
     text-align: center;
   }
+  .lent-chip {
+    background-color: orange;
+  }
+  .borrowed-chip {
+    background-color: red;
+  }
+  .chip-width {
+    min-width: 100px;
+  }
 }
