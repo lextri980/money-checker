@@ -9,13 +9,14 @@ import { ILogin } from "./type";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { AuthActions } from "@/store/authStore/auth.reducer";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const dispatch = useDispatch();
+  const router = useRouter();
   const defaultValues: DefaultValues<ILogin> = {
     email: "",
     password: "",
-    remember: false,
   };
 
   const {
@@ -29,7 +30,15 @@ export default function Login() {
   });
 
   const login: SubmitHandler<ILogin> = (value) => {
-    dispatch(AuthActions.loginRequest(value));
+    dispatch(
+      AuthActions.loginRequest({
+        loginForm: value,
+        navigate: (userId: string) => {
+          router.push(`/loan-list?userId=${userId}`);
+          router.refresh();
+        },
+      })
+    );
     reset();
   };
 
@@ -61,10 +70,6 @@ export default function Login() {
         <small className="text-red-500 align-self-start w-full">
           {errors && errors.password?.message}
         </small>
-        <div className="remember-me">
-          <FormInput control={control} type="checkbox" name="remember" />
-          <span>Remember me</span>
-        </div>
         <div className="register-link">
           <Link className="hyperlink" href="/register">
             Register

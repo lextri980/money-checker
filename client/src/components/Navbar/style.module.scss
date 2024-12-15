@@ -6,8 +6,40 @@
   justify-content: space-between;
   box-shadow: 0 4px 4px #d3d3d3;
   margin-bottom: 20px;
+  background-color: white;
   .navbar-menu {
     display: flex;
     align-items: center;
+    .logo-section {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      margin-right: 30px;
+    }
+    .single-nav-menu {
+      > a {
+        font-weight: 600;
+        position: relative;
+        transition: color 0.25s;
+        padding: 5px 10px;
+        z-index: 1;
+        &::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: black;
+          scale: 1 0;
+          z-index: -1;
+          transition: 0.5s;
+          border-radius: 4px;
+        }
+        &:hover {
+          color: white;
+        }
+        &:hover::after {
+          scale: 1 1;
+        }
+      }
+    }
   }
 }
