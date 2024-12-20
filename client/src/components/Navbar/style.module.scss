@@ -17,6 +17,10 @@
       margin-right: 30px;
     }
     .single-nav-menu {
+      &.active {
+        background-color: black;
+        color: white;
+      }
       > a {
         font-weight: 600;
         position: relative;

@@ -13,10 +13,12 @@ export default function Navbar() {
   const router = useRouter();
   const inSession = useClientCookie("inSession");
   const [isLoading, setIsLoading] = useState(true);
+  // const isLocalStorage = StorageUtil.getLocal("test");
 
   useEffect(() => {
     setIsLoading(false);
   }, []);
+  
 
   /**
    * Handle logout
@@ -33,10 +35,14 @@ export default function Navbar() {
           <Icon icon={faReceipt} size="2x" className="mr-4" />
           <span className="text-xl font-bold">MONEY CHECKER</span>
         </div>
-        <div className={styles["single-nav-menu"]}>
+        <div className={`${styles["single-nav-menu"]} mr-2`}>
+          <Link href="/loan-list">Loan list</Link>
+        </div>
+        <div className={`${styles["single-nav-menu"]} mr-2`}>
           <Link href="/user-list">User list</Link>
         </div>
       </div>
+      {/* {isLocalStorage && <p>{isLocalStorage}</p>} */}
       {inSession && !isLoading ? (
         <Button className="black-bg" onClick={logout}>
           Logout
