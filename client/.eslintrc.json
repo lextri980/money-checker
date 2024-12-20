@@ -31,7 +31,7 @@
     "no-alert": "warn",
     "no-console": "warn",
     "no-debugger": "error",
-    "no-unused-vars": "warn",
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
     "no-throw-literal": "error",
     "no-irregular-whitespace": [
       "error",
@@ -54,7 +54,7 @@
     }
   },
   "overrides": [
-    // For all files with ts, tsx file extension
+    // For all files with extension .ts, tsx file extension
     {
       "files": ["src/app/**/*.{ts,tsx}"],
       "excludedFiles": ["src/app/**/components/**/*.{ts,tsx}"],
@@ -66,12 +66,19 @@
         "filenames/match-exported": "off"
       }
     },
-    // For all files with ts, tsx file extension in store folder
+    // For all files with extension .ts, tsx file extension in store folder
     {
       "files": ["src/store/**/*.{ts,tsx}"],
       "rules": {}
     },
-    // For all files with stories.ts, stories.tsx file extension
+    // For all files with extension .saga.ts, .saga.tsx file extension in store folder
+    {
+      "files": ["**/*.saga.{ts,tsx}"],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off"
+      }
+    },
+    // For all files with extension .stories.ts, stories.tsx file extension
     {
       "files": ["**/*.stories.{ts,tsx}"],
       "rules": {
@@ -79,7 +86,7 @@
         "filenames/match-exported": "off"
       }
     },
-    // For all files with spec.ts, spec.tsx file extension in tests folder
+    // For all files with extension .spec.ts, spec.tsx file extension in tests folder
     {
       "files": ["tests/**/*.spec.{ts,tsx}"],
       "env": {
@@ -91,7 +98,7 @@
         "filenames/match-exported": "off"
       }
     },
-    // For all files with json, mjs file extension
+    // For all files with extension .json, mjs file extension
     {
       "files": [
         ".eslintrc.json",
@@ -104,7 +111,7 @@
         "filenames/match-regex": "off"
       }
     },
-    // For all files with type.ts file extension
+    // For all files with extension .type.ts file extension
     {
       "files": ["**/type.ts"],
       "rules": {

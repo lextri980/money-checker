@@ -1,6 +1,39 @@
+/**
+ * ---------------------------------------------
+ ** LINK
+ * ---------------------------------------------
+ */
 a.hyperlink {
   color: #074799;
   &:hover {
     text-decoration: underline;
+  }
+}
+/**
+ * ---------------------------------------------
+ ** TABLE
+ * ---------------------------------------------
+ */
+.table-primary {
+  > div {
+    border-radius: 6px;
+  }
+  th {
+    background-color: #535353;
+    color: white;
+  }
+  ::-webkit-scrollbar {
+    width: 7px;
+    border-radius: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #cdcdcd;
+    border-radius: 5px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
   }
 }

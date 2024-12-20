@@ -1,11 +1,12 @@
 "use client";
 import Button from "@/components/Button";
 import FormInput from "@/components/FormInput";
+import { useClientCookie } from "@/hooks";
 import { DefaultResponseType } from "@/types/common.type";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Tab, Tabs } from "@nextui-org/react";
 import { Key } from "@react-types/shared";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import DetailTab from "../DetailTab";
 import TotalTab from "../TotalTab";
@@ -17,8 +18,16 @@ export default function TabWrapper({
 }: {
   loanListResponse: DefaultResponseType;
 }) {
+  const inSession = useClientCookie("inSession");
   const [selectedTab, setSelectedTab] = useState<Key>("detail");
+
   const { control } = useForm({ resolver: yupResolver(schema) });
+
+  useEffect(() => {
+    if (!inSession) {
+      setSelectedTab("total");
+    }
+  }, [inSession]);
 
   /**
    * Handle change tab
@@ -35,10 +44,18 @@ export default function TabWrapper({
           control={control}
           name="search"
           placeholder="Search your name"
-          className="w-6/12"
+          className="w-1/3"
           variant="bordered"
         />
         <Button className="black-bg">Search</Button>
+        <FormInput
+          control={control}
+          type="date-range"
+          name="date-range"
+          className="max-w-[250px]"
+          variant="bordered"
+          isDisabled={inSession === "false" || !inSession}
+        />
       </div>
       <Tabs
         aria-label="Options"

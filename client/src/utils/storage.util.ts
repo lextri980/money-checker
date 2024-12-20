@@ -46,12 +46,14 @@ export default class StorageUtil {
    * Set item to cookie storage
    * @param {string} itemName - Item name
    * @param {string} item - Item value
+   * @param {string} expiredTime - The expiredTime compute by second
    */
   static setCookie<T extends string | number | boolean | object>(
     itemName: string,
-    item: T
+    item: T,
+    expiredTime?: number
   ) {
-    document.cookie = `${itemName}=${item}`;
+    document.cookie = `${itemName}=${item}; max-age=${expiredTime}`;
   }
 
   /**

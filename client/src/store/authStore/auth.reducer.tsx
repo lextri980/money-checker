@@ -10,11 +10,11 @@ const AuthReducer = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    loginRequest(state, action) {
+    loginRequest(state, _action) {
       state.success = false;
       state.message = "";
     },
-    loginSuccess(state, action) {
+    loginSuccess(state, _action) {
       state.success = true;
       state.message = "";
     },

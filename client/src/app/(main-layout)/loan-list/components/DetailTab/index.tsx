@@ -22,7 +22,12 @@ export default function DetailTab({
   );
   return (
     <div className="loan-list-page__detail-tab-container">
-      <Table aria-label="Total table" isStriped className="">
+      <Table
+        className="table-primary detail-loan-table"
+        aria-label="Total table"
+        isStriped
+        isHeaderSticky
+      >
         <TableHeader>
           <TableColumn width={75}>NO.</TableColumn>
           <TableColumn width={75}>DAY</TableColumn>
