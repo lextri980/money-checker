@@ -3,6 +3,7 @@ import Button from "@/components/Button";
 import FormInput from "@/components/FormInput";
 import { useClientCookie } from "@/hooks";
 import { DefaultResponseType } from "@/types/common.type";
+import { TransformDataUtil } from "@/utils";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Tab, Tabs } from "@nextui-org/react";
 import { Key } from "@react-types/shared";
@@ -24,7 +25,7 @@ export default function TabWrapper({
   const { control } = useForm({ resolver: yupResolver(schema) });
 
   useEffect(() => {
-    if (!inSession) {
+    if (TransformDataUtil.stringToBoolean(inSession) === false) {
       setSelectedTab("total");
     }
   }, [inSession]);
