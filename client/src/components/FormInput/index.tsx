@@ -4,9 +4,9 @@ import {
   FieldValues,
 } from "react-hook-form";
 import { InputComponent, InputType } from "./helper";
-import { IFormInput } from "./type";
 
-export default function FormInput(props: IFormInput) {
+// eslint-disable-next-line
+export default function FormInput(props: any) {
   const {
     type = InputType.InputText,
     control,

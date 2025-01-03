@@ -1,4 +1,5 @@
 import "@/assets/style/global.scss";
+import Loading from "@/components/Loading";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
@@ -25,8 +26,11 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/image/favicon.ico" />
       </head>
-      <body className={`${nunito.className} antialiased`}>
-        <Providers>{children}</Providers>
+      <body className={`${nunito.className} antialiased relative`}>
+        <Providers>
+          <Loading />
+          {children}
+        </Providers>
       </body>
     </html>
   );

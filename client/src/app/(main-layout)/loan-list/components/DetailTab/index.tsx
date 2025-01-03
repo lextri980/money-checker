@@ -1,4 +1,4 @@
-import { DefaultResponseType } from "@/types/common.type";
+"use client";
 import { DateUtil } from "@/utils";
 import {
   Chip,
@@ -9,21 +9,22 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/react";
+import { RootState } from "@store";
+import { useSelector } from "react-redux";
 import "./style.scss";
 
-export default function DetailTab({
-  loanListResponse,
-}: {
-  loanListResponse: DefaultResponseType;
-}) {
-  const totalCost = loanListResponse.data?.reduce(
+export default function DetailTab() {
+  const { loanList } = useSelector((state: RootState) => state.loan);
+
+  const totalCost = loanList?.reduce(
     (acc: number, item: any) => acc + item.amount,
     0
   );
+
   return (
     <div className="loan-list-page__detail-tab-container">
       <Table
-        className="table-primary detail-loan-table"
+        className="table-container detail-loan-table"
         aria-label="Total table"
         isStriped
         isHeaderSticky
@@ -40,7 +41,7 @@ export default function DetailTab({
           </TableColumn>
         </TableHeader>
         <TableBody emptyContent={"No loan to display."}>
-          {loanListResponse.data?.map((item: any, index: number) => (
+          {loanList?.map((item: any, index: number) => (
             <TableRow key={index}>
               <TableCell>{index + 1}</TableCell>
               <TableCell>

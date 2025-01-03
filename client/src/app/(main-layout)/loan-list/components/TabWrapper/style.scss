@@ -4,5 +4,24 @@
     display: flex;
     align-items: center;
     gap: 15px;
+    .search-name-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      position: relative;
+      .search-icon {
+        position: absolute;
+        right: 15px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.loan-list-page__tab-wrapper-container_create-loan-dialog {
+  .asd {
+    p {
+      font-size: 14px;
+    }
   }
 }

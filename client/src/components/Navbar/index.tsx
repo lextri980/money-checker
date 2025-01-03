@@ -1,24 +1,41 @@
 "use client";
 import { useClientCookie } from "@/hooks";
-import { faDoorOpen, faReceipt } from "@fortawesome/free-solid-svg-icons";
+import { StorageUtil } from "@/utils";
+import {
+  faDoorOpen,
+  faReceipt,
+  faUser,
+  faWallet,
+} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Button from "../Button";
 import Icon from "../Icon";
 import styles from "./style.module.scss";
-import { StorageUtil } from "@/utils";
 
 export default function Navbar() {
   const router = useRouter();
   const inSession = useClientCookie("inSession");
+  const userInfoCookie = useClientCookie("userInfo");
   const [isLoading, setIsLoading] = useState(true);
-  // const isLocalStorage = StorageUtil.getLocal("test");
+  const userInfo = userInfoCookie && JSON.parse(userInfoCookie);
+  const menuList = [
+    {
+      title: "Loan list",
+      href: `/loan-list?userId=${userInfo?.userId}`,
+      icon: faWallet,
+    },
+    {
+      title: "User list",
+      href: "/user-list",
+      icon: faUser,
+    },
+  ];
 
   useEffect(() => {
     setIsLoading(false);
   }, []);
-  
 
   /**
    * Handle logout
@@ -35,21 +52,22 @@ export default function Navbar() {
           <Icon icon={faReceipt} size="2x" className="mr-4" />
           <span className="text-xl font-bold">MONEY CHECKER</span>
         </div>
-        <div className={`${styles["single-nav-menu"]} mr-2`}>
-          <Link href="/loan-list">Loan list</Link>
-        </div>
-        <div className={`${styles["single-nav-menu"]} mr-2`}>
-          <Link href="/user-list">User list</Link>
-        </div>
+        {menuList.map((item, index) => (
+          <div key={index} className={`${styles["single-nav-menu"]} mr-2`}>
+            <Link href={item.href}>
+              <Icon icon={item.icon} className="mr-2" />
+              {item.title}
+            </Link>
+          </div>
+        ))}
       </div>
-      {/* {isLocalStorage && <p>{isLocalStorage}</p>} */}
       {inSession && !isLoading ? (
-        <Button className="black-bg" onClick={logout}>
+        <Button className="black-bg font-semibold" onClick={logout}>
           Logout
           <Icon icon={faDoorOpen} />
         </Button>
       ) : !inSession && !isLoading ? (
-        <Button className="black-bg" onClick={() => router.push("/login")}>
+        <Button className="black-bg font-semibold" onClick={() => router.push("/login")}>
           Login
         </Button>
       ) : (

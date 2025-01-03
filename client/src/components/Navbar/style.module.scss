@@ -17,6 +17,8 @@
       margin-right: 30px;
     }
     .single-nav-menu {
+      display: flex;
+      align-items: center;
       &.active {
         background-color: black;
         color: white;

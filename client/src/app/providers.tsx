@@ -1,4 +1,5 @@
 import { StyledComponentsRegistry } from "@/libs";
+import ToastProvider from "@/libs/toastify";
 import StoreProvider from "@/store/StoreProvider";
 import { NextUIProvider } from "@nextui-org/react";
 
@@ -15,7 +16,9 @@ export function Providers({
   return (
     <StyledComponentsRegistry>
       <StoreProvider>
-        <NextUIProvider>{children}</NextUIProvider>
+        <NextUIProvider>
+          <ToastProvider>{children}</ToastProvider>
+        </NextUIProvider>
       </StoreProvider>
     </StyledComponentsRegistry>
   );

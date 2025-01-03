@@ -111,7 +111,7 @@ class ApiService {
           this.axiosInstance.put(endpoint, data)
         );
       return response;
-    } catch {
+    } catch(e) {
       throw new Error("Something wrong");
     }
   }

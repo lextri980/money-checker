@@ -2,6 +2,7 @@ import InputCheckbox from "./InputCheckbox";
 import InputDateRange from "./InputDateRange";
 import InputPassword from "./InputPassword";
 import InputText from "./InputText";
+import Select from "./Select";
 
 export const InputType = {
   InputText: "text",
@@ -28,5 +29,8 @@ export const InputComponent = {
   },
   [InputType.InputDateRange]: {
     Component: InputDateRange,
+  },
+  [InputType.InputSelect]: {
+    Component: Select,
   },
 };

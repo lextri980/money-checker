@@ -1,3 +1,4 @@
+/** BACKGROUND COLOR */
 .error-bg {
   background-color: #FF4545;
 }
@@ -17,6 +18,7 @@
 .white-bg {
   background-color: white;
 }
+/** TEXT COLOR */
 .text-error {
   color: #FF4545;
 }
@@ -34,4 +36,10 @@
 }
 .text-white {
   color: white;
+}
+/** FORM */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }

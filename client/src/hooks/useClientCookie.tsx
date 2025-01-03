@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 
-export function useClientCookie(cookieName: string) {
+export default function useClientCookie(cookieName: string) {
   const [cookieValue, setCookieValue] = useState("");
 
   useEffect(() => {
@@ -20,5 +20,5 @@ export function useClientCookie(cookieName: string) {
     }
   }, [cookieName]);
 
-  return cookieValue;
+  return `${cookieValue}`;
 }
